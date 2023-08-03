@@ -1,10 +1,12 @@
 package com.omer.trivia.beans;
 
+import com.omer.trivia.PlayerResponse;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 
 @Entity
 @Table(name = "game_rounds")
@@ -23,6 +25,8 @@ public class GameRound {
     private int currentQuestionIdx;
 
     private HashMap<Question, Timestamp> presentTimes; //TODO: Figure out what are your needs and find the right timeStamp type. Fix - 'name unintuitive to use-case'. Find Annotations.
+
+    private List<PlayerResponse> playerResponses;
 
 
 
