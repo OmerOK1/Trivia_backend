@@ -10,6 +10,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, length = 30)
     private String id;
+
+    private String email;
+
+    private String phoneNumber;
+
+    private String name;
+
+    private String country;
+
+
 }
 /*TODO: User:
         Id : string
