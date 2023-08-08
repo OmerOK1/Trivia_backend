@@ -3,18 +3,21 @@ package com.omer.trivia.beans;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "questions")
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, length = 30)
-    private String id;
+    private int id;
     @Column(nullable = false)
     private String questionBody;
 
@@ -28,7 +31,7 @@ public class Question {
     @CollectionTable(name = "question_answers")
     @MapKeyColumn(name = "answer_body")
     @Column(name = "is_correct")
-    private HashMap<String, Boolean> answersToCorrectness;
+    private Map<String, Boolean> answersToCorrectness;
 
     @Column(nullable = false)
     private Category category; // Todo: only one? choose.
@@ -37,9 +40,13 @@ public class Question {
     @Column(nullable = false)
     private Difficulty difficulty;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
-    private User creator;
+    private User creator; //TODO separate 2 entities for created by player and from api
+*/
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
+    private Round round;
 
     @Column(nullable = false)
     private String sourceAPI;//TODO: enum? could be useful to track in some cases

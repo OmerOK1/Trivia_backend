@@ -9,11 +9,6 @@ import java.util.Optional;
 
 @Repository
 
-public interface QuestionRepository extends JpaRepository<Question, String> {
-    boolean existsById(String id);
+public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
-    List<Question> findByCreatorId(String id);
-
-    @Override
-    Optional<Question> findById(String id);
 }

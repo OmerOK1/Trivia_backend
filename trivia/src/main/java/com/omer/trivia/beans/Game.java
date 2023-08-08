@@ -4,7 +4,10 @@ import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
 import com.omer.trivia.beans.enums.Layout;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
@@ -12,14 +15,17 @@ import java.util.Set;
 @Entity
 @Table(name = "games")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, length = 30)
-    private String id;
-    @Column(nullable = false)
-    private User host;
-    @Column(nullable = false)
+    private int id;
+
+    /*@Column(nullable = false)
+    private MyUser host;*/
+    @Column(nullable = false, name = "game_title")
     private String title;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "game_categories")
@@ -35,29 +41,22 @@ public class Game {
     private int questionsPerRound;
     @Column(nullable = false)
     private int answerTimeLimit;
-    @Enumerated(EnumType.STRING)
-    private Layout layout; //TODO: check if more annotations are needed
-    @Column(nullable = false)
+    /*@Enumerated(EnumType.STRING)
+    private Layout layout; //TODO: check if more annotations are needed*/
+    @Column(nullable = false, name = "game_url")
     private String url; //TODO: string?
-    @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY)//TODO: mappedBy = "x" not working
-    private Set<User> players;
-    @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY)
-    private List<Round> rounds;
 
-
-
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }
+
+    /*@OneToMany(cascade = {CascadeType.ALL},
+            fetch = FetchType.LAZY)//TODO: mappedBy = "x" not working
+    private Set<MyUser> players;*/
+    /*@OneToMany(cascade = {CascadeType.ALL},
+            fetch = FetchType.LAZY)
+    private List<Round> rounds;*/
+
+
+
 
 
 //TODO: Game:

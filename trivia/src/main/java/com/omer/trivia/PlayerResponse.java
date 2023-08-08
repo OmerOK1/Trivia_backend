@@ -1,3 +1,4 @@
+/*
 package com.omer.trivia;
 
 import com.omer.trivia.beans.Question;
@@ -27,4 +28,4 @@ public class PlayerResponse {
 // –
 // isCorrect()
 // getTimeToAnswer()
-// getScore()
+// getScore()*/
