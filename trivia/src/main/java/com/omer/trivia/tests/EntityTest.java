@@ -7,13 +7,10 @@ import com.omer.trivia.beans.enums.Difficulty;
 import com.omer.trivia.repository.QuestionRepository;
 import com.omer.trivia.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 @Order(1)
@@ -38,17 +35,13 @@ public class EntityTest implements CommandLineRunner {
         /////////////////////////////////////////////////////////////////
 
 
-        Map<String, Boolean> answersQuestion1 = new <String, Boolean>() {
-        };
-        answersQuestion1.put("red", false);
-        answersQuestion1.put("blue", false);
-        answersQuestion1.put("yellow", true);
-        answersQuestion1.put("green", false);
-
-
         Question question1 = Question.builder()
                 .questionBody("which of the following isn't a primary color?")
-                .answersToCorrectness(answersQuestion1)
+                .option1("red")
+                .option3("green")
+                .option2("yellow")
+                .option4("blue")
+                .correctAnswer("green")
                 .category(Category.general)
                 .difficulty(Difficulty.easy)
                 .sourceAPI("mine")

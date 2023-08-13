@@ -5,6 +5,7 @@ import com.omer.trivia.beans.enums.Difficulty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -22,47 +23,26 @@ public class Question {
     private String questionBody;
 
 
-    /**
-     * Mapping of possible answers to their correctness status.
-     * Was previously a OneToMany relationship with another entity for Answer.
-     * This is a little less obvious to use, but much more compact.
-     */
-    @ElementCollection
-    @CollectionTable(name = "question_answers")
-    @MapKeyColumn(name = "answer_body")
-    @Column(name = "is_correct")
-    private Map<String, Boolean> answersToCorrectness;
+    private String option1;
+    private String option2;
+    private String option3;
+    private String option4;
+    private String correctAnswer;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Category category; // Todo: only one? choose.
+    private Category category;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Difficulty difficulty;
 
-   /* @ManyToOne
-    @JoinColumn(name = "creator_id", nullable = false)
-    private User creator; //TODO separate 2 entities for created by player and from api
-*/
-    @ManyToOne(fetch = FetchType.EAGER)
+    /*@ManyToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
-    private Round round;
+    private Round round;*/
 
     @Column(nullable = false)
-    private String sourceAPI;//TODO: enum? could be useful to track in some cases
+    private String sourceAPI;
 
 }
 
-//TODO: Question:
-// id : string
-// questionText : string
-// –
-// possibleAnswers : map<String, boolean>
-// –
-// category : Category
-// difficulty : Difficulty
-// –
-// creator: User
-// sourceAPI: String
-// –
-// checkAnswer(answer) -> bool

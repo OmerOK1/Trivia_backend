@@ -19,17 +19,15 @@ public class Round {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "round_categories")
-    @Column(name = "category")
-    @Enumerated(EnumType.STRING)
-    private Set<Category> categories;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "round_difficulties")
-    @Column(name = "difficulty")
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Set<Difficulty> difficulties;
+    private Category category; // TODO(low priority): consider making a list of categories instead of 1.
+
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
 
     @Column(nullable = false)
     private int questionsPerRound;
@@ -37,12 +35,12 @@ public class Round {
     private int answerTimeLimit;
 
 
-    @ToString.Exclude
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "round", fetch = FetchType.LAZY) //TODO: add needed annotations
-    private List<Question> questionList;
+    /*@ToString.Exclude
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "round", fetch = FetchType.LAZY)
+    private List<Question> questionList;*/
 
 
-    /*private User Creator; // TODO*/
+    /*private User Creator; */
 
 
 

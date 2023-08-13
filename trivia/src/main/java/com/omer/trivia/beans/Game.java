@@ -22,34 +22,26 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    /*@Column(nullable = false)
-    private MyUser host;*/
     @Column(nullable = false, name = "game_title")
     private String title;
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "game_categories")
-    @Column(name = "category")
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Set<Category> categories;
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "game_difficulties")
-    @Column(name = "difficulty")
-    @Enumerated(EnumType.STRING)
-    private Set<Difficulty> difficulties;
+    private Category category;
+    private Difficulty difficulty;
     @Column(nullable = false)
     private int questionsPerRound;
     @Column(nullable = false)
     private int answerTimeLimit;
-    /*@Enumerated(EnumType.STRING)
-    private Layout layout; //TODO: check if more annotations are needed*/
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false) // change nullable to false if needed. design wise it's best to only create if changed from default
+    private Layout layout;
     @Column(nullable = false, name = "game_url")
-    private String url; //TODO: string?
+    private String url;
 
 }
 
     /*@OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY)//TODO: mappedBy = "x" not working
+            fetch = FetchType.LAZY)//
     private Set<MyUser> players;*/
     /*@OneToMany(cascade = {CascadeType.ALL},
             fetch = FetchType.LAZY)
@@ -59,7 +51,7 @@ public class Game {
 
 
 
-//TODO: Game:
+//Game:
 //        factorDiffculty: Enum(High, Medium Low) ??
 //        factorTime: Enum(High, Medium Low) ??
 //        –
