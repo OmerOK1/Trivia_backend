@@ -1,4 +1,4 @@
-package com.omer.trivia;
+package com.omer.trivia.apis;
 
 import lombok.Data;
 

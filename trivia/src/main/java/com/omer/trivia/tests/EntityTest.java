@@ -4,18 +4,28 @@ import com.omer.trivia.beans.Question;
 import com.omer.trivia.beans.Customer;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
+import com.omer.trivia.dto.QuestionDto;
 import com.omer.trivia.repository.QuestionRepository;
 import com.omer.trivia.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 
 
 @Component
 @Order(1)
 @RequiredArgsConstructor
 public class EntityTest implements CommandLineRunner {
+
+    private static final String API_URL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple";
+
+    private final RestTemplate restTemplate;
+
 
     private final QuestionRepository questionRepository;
     private final CustomerRepository customerRepository;
@@ -42,7 +52,7 @@ public class EntityTest implements CommandLineRunner {
                 .option2("yellow")
                 .option4("blue")
                 .correctAnswer("green")
-                .category(Category.general)
+                .category(Category.Art)
                 .difficulty(Difficulty.easy)
                 .sourceAPI("mine")
                 .build();
@@ -68,8 +78,20 @@ public class EntityTest implements CommandLineRunner {
         questionRepository.findAll().forEach(System.out::println);
     }
 
+
+    private void testExternalApiByGameEntity() {
+        ResponseEntity<String> result = restTemplate.getForEntity(API_URL, String.class);
+//        System.out.println(result);
+//        Arrays.asList(result).forEach(System.out::println);
+
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        createDataTest();
+        //createDataTest();
+
+        //testExternalApiByGameEntity();
+
+
     }
 }
