@@ -52,7 +52,7 @@ public class EntityTest implements CommandLineRunner {
                 .option2("yellow")
                 .option4("blue")
                 .correctAnswer("green")
-                .category(Category.Art)
+                .category(Category.ART)
                 .difficulty(Difficulty.easy)
                 .sourceAPI("mine")
                 .build();

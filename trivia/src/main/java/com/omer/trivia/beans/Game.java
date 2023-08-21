@@ -30,7 +30,7 @@ public class Game {
     private Difficulty difficulty;
     @Column(nullable = false)
     private int questionsPerRound;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int answerTimeLimit;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false) // change nullable to false if needed. design wise it's best to only create if changed from default
