@@ -1,4 +1,4 @@
-package com.omer.trivia.beans;
+/*package com.omer.trivia.beans;
 
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
@@ -35,16 +35,16 @@ public class Round {
     private int answerTimeLimit;
 
 
-    /*@ToString.Exclude
+    *//*@ToString.Exclude
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "round", fetch = FetchType.LAZY)
-    private List<Question> questionList;*/
+    private List<Question> questionList;*//*
 
 
-    /*private User Creator; */
+    *//*private User Creator; *//*
 
 
 
-}
+}*/
 //TODO:
 //  factorDiffculty: Enum(High, Medium Low)
 //  factorTime: Enum(High, Medium Low)
