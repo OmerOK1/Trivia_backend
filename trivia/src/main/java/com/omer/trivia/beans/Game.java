@@ -1,5 +1,6 @@
 package com.omer.trivia.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
 import com.omer.trivia.beans.enums.Layout;
@@ -9,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +29,8 @@ public class Game {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
     @Column(nullable = false)
     private int questionsPerRound;
@@ -38,41 +42,12 @@ public class Game {
     @Column(nullable = false, name = "game_url")
     private String url;
 
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            mappedBy = "game",
+            fetch = FetchType.LAZY
+    )
+    @JsonIgnore
+    private List<Question> questions = new ArrayList<>();
 }
-
-    /*@OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY)//
-    private Set<MyUser> players;*/
-    /*@OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY)
-    private List<Round> rounds;*/
-
-
-
-
-
-//Game:
-//        factorDiffculty: Enum(High, Medium Low) ??
-//        factorTime: Enum(High, Medium Low) ??
-//        –
-//        addPredefinedRound(Round)
-//        generateRound()
-//        removeRoundByIndex(index)
-//        removeRoundById(roundId)
-//        –
-//        createGameURL()
-//        emailURL(emails: List)
-//        smsURL(phoneNumbers: List)
-//        –
-//        addPlayer(User)
-//        removePlayer(User)
-//        –
-//        startGame (??? What tasks happen here ???)
-//        startNextRound()
-//        –
-//        getGameUserScores(player)
-//        getGameScores()
-//        –
-//        hasMoreRounds()
-
 

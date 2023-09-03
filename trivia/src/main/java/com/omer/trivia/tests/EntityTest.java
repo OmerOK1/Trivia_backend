@@ -4,7 +4,6 @@ import com.omer.trivia.beans.Question;
 import com.omer.trivia.beans.Customer;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
-import com.omer.trivia.dto.QuestionDto;
 import com.omer.trivia.repository.QuestionRepository;
 import com.omer.trivia.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +12,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
 
 
 @Component

@@ -1,5 +1,6 @@
 package com.omer.trivia.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
 import jakarta.persistence.*;
@@ -21,12 +22,20 @@ public class Question {
     private int id;
     @Column(nullable = false)
     private String questionBody;
-
+    @Column(nullable = false)
 
     private String option1;
+    @Column(nullable = false)
+
     private String option2;
+    @Column(nullable = false)
+
     private String option3;
+    @Column(nullable = false)
+
     private String option4;
+    @Column(nullable = false)
+
     private String correctAnswer;
 
     @Enumerated(EnumType.STRING)
@@ -37,12 +46,11 @@ public class Question {
     @Column(nullable = false)
     private Difficulty difficulty;
 
-    /*@ManyToOne(fetch = FetchType.EAGER)
-    @ToString.Exclude
-    private Round round;*/
-
     @Column(nullable = false)
     private String sourceAPI;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_id")
+    private Game game;
 
 }
 

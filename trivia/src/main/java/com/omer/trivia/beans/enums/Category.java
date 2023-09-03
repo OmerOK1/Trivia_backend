@@ -26,5 +26,7 @@ public enum Category {
     SCIENCE_GADGETS,
     ENTERTAINMENT_JAPANESE_ANIME_MANGA,
     ENTERTAINMENT_CARTOON_ANIMATIONS,
+    ANY;
     //must match api list exactly, TODOcreate a DTO enum for each api
+
 }

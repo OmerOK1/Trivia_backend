@@ -1,8 +1,7 @@
 package com.omer.trivia.beans.enums;
 
 public enum Layout {
-    normal ,
-    dark
-
+    NORMAL,
+    DARK,
     ;
 }

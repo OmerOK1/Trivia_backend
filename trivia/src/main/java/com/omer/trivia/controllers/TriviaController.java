@@ -1,4 +1,4 @@
-package com.omer.trivia;
+package com.omer.trivia.controllers;
 
 import com.omer.trivia.apis.TriviaApiClient;
 import com.omer.trivia.apis.TriviaResponse;
