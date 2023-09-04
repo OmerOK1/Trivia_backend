@@ -1,6 +1,7 @@
 package com.omer.trivia.controllers;
 
 import com.omer.trivia.beans.Game;
+import com.omer.trivia.reactDto.GameDto;
 import com.omer.trivia.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class CustomerController {
 
     @PostMapping({"games"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Game addGame(@RequestBody Game game) throws Exception {
+    public GameDto addGame(@RequestBody Game game) throws Exception {
         return this.customerService.addGame(game);
     }
 

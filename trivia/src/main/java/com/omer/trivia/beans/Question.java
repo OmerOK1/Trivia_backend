@@ -23,34 +23,18 @@ public class Question {
     @Column(nullable = false)
     private String questionBody;
     @Column(nullable = false)
-
     private String option1;
     @Column(nullable = false)
-
     private String option2;
     @Column(nullable = false)
-
     private String option3;
     @Column(nullable = false)
-
     private String option4;
     @Column(nullable = false)
-
     private String correctAnswer;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Category category;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Difficulty difficulty;
-
-    @Column(nullable = false)
-    private String sourceAPI;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "game_id")
     private Game game;
-
 }
 

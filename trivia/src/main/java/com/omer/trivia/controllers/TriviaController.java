@@ -1,23 +1,23 @@
 package com.omer.trivia.controllers;
 
-import com.omer.trivia.apis.TriviaApiClient;
-import com.omer.trivia.apis.TriviaResponse;
+import com.omer.trivia.apis.OpenTdbApi;
+import com.omer.trivia.apis.OpenTdbResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TriviaController {
-    private final TriviaApiClient triviaApiClient;
+    private final OpenTdbApi openTdbApi;
 
     @Autowired
-    public TriviaController(TriviaApiClient triviaApiClient) {
-        this.triviaApiClient = triviaApiClient;
+    public TriviaController(OpenTdbApi openTdbApi) {
+        this.openTdbApi = openTdbApi;
     }
 
     @GetMapping("/trivia")
-    public TriviaResponse getTrivia(String API_URL) {
-        return triviaApiClient.getTrivia(API_URL);
+    public OpenTdbResponse getTrivia(String API_URL) {
+        return openTdbApi.getTrivia(API_URL);
     }
 
 }

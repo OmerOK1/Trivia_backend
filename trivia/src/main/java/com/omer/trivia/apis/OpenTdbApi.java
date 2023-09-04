@@ -7,13 +7,13 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequiredArgsConstructor
-public class TriviaApiClient {
+public class OpenTdbApi {
     //    private static String API_URL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple";
 
     private final RestTemplate restTemplate;
 
-    public TriviaResponse getTrivia(String API_URL) {
-        ResponseEntity<TriviaResponse> responseEntity = restTemplate.getForEntity(API_URL, TriviaResponse.class);
+    public OpenTdbResponse getTrivia(String API_URL) {
+        ResponseEntity<OpenTdbResponse> responseEntity = restTemplate.getForEntity(API_URL, OpenTdbResponse.class);
         return responseEntity.getBody();
     }
 }

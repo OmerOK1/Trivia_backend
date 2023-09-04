@@ -1,8 +1,8 @@
 package com.omer.trivia.tests;
 
-import com.omer.trivia.apis.TriviaApiClient;
-import com.omer.trivia.apis.TriviaResponse;
-import com.omer.trivia.apis.dto.QuestionDto;
+import com.omer.trivia.apis.OpenTdbApi;
+import com.omer.trivia.apis.OpenTdbResponse;
+import com.omer.trivia.apis.dto.QuestionDtoOpenTdb;
 import com.omer.trivia.beans.Game;
 import com.omer.trivia.controllers.CustomerController;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +17,7 @@ public class TriviaApiTests implements CommandLineRunner {
     }
 
     private void triviaTest() {
-        TriviaApiClient triviaApiClient = new TriviaApiClient(new RestTemplate());
+        OpenTdbApi openTdbApi = new OpenTdbApi(new RestTemplate());
 
         Game game = EntityFactory.factorRandomGame();
 
@@ -26,11 +26,11 @@ public class TriviaApiTests implements CommandLineRunner {
 
         System.out.println(API_URL);
 
-        TriviaResponse triviaResponse = triviaApiClient.getTrivia(API_URL);
+        OpenTdbResponse openTdbResponse = openTdbApi.getTrivia(API_URL);
 
-        if (triviaResponse != null && triviaResponse.getResults() != null && !triviaResponse.getResults().isEmpty()) {
+        if (openTdbResponse != null && openTdbResponse.getResults() != null && !openTdbResponse.getResults().isEmpty()) {
             int questionNumber = 1;
-            for (QuestionDto triviaResult : triviaResponse.getResults()) {
+            for (QuestionDtoOpenTdb triviaResult : openTdbResponse.getResults()) {
 
                 System.out.println("Question " + questionNumber + ": " + triviaResult.getQuestion());
                 System.out.println("Options: " + triviaResult.getOptions());

@@ -1,13 +1,11 @@
 package com.omer.trivia.apis.dto;
 
-import com.omer.trivia.beans.enums.Category;
-import com.omer.trivia.beans.enums.Difficulty;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class QuestionDto {
+public class QuestionDtoOpenTdb {
     private String category;
     private String type;
     private String difficulty;
