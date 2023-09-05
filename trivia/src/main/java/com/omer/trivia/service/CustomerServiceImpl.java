@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService{
             System.out.println("game is null at Service");
             throw new Exception("game is null at Service");
         }
-        System.out.println(game);
+
         game.setQuestions(getQuestions(game));
         game.setUrl("/game url"); // TODO: temp
         gameRepository.save(game);

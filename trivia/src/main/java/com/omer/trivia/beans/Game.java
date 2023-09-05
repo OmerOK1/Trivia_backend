@@ -45,7 +45,7 @@ public class Game {
     @OneToMany(
             cascade = {CascadeType.ALL},
             mappedBy = "game",
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JsonIgnore
     private List<Question> questions = new ArrayList<>();

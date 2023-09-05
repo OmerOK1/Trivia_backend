@@ -34,6 +34,7 @@ public class Question {
     private String correctAnswer;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
+    @ToString.Exclude
     @JoinColumn(name = "game_id")
     private Game game;
 }
