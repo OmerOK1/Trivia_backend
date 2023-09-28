@@ -1,2 +1,2 @@
-# Trivia
- Trivia game website
+# Trivia Backend
+ Trivia game website server, using Spring web.
