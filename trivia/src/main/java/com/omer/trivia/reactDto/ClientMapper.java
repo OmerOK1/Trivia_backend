@@ -39,6 +39,7 @@ public class ClientMapper {
         dto.setAnswerTimeLimit(entity.getAnswerTimeLimit());
         dto.setQuestionsPerRound(entity.getQuestionsPerRound());
         dto.setQuestions(mapToDtoList(entity.getQuestions()));
+        dto.setMultiplayer(entity.isMultiplayer());
         return dto;
     }
 }

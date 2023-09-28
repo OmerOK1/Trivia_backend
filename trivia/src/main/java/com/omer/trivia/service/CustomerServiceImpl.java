@@ -13,6 +13,7 @@ import com.omer.trivia.repository.CustomerRepository;
 import com.omer.trivia.repository.GameRepository;
 import com.omer.trivia.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    @Transactional
     public GameDto addGame(Game game) throws Exception {
         if (game == null) {
             System.out.println("game is null at Service");
@@ -52,8 +54,8 @@ public class CustomerServiceImpl implements CustomerService{
         }
 
         game.setQuestions(getQuestions(game));
-        game.setUrl("/game url"); // TODO: temp
-        gameRepository.save(game);
+        game = gameRepository.save(game);
+        game.setUrl("game/multiplayer/"+game.getId());
         return ClientMapper.mapToGameDto(game);
     }
 }

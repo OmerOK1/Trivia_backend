@@ -13,5 +13,6 @@ public class GameDto {
     private int answerTimeLimit;
     private String layout;
     private String url;
+    private boolean isMultiplayer;
     private List<QuestionDto> questions;
 }

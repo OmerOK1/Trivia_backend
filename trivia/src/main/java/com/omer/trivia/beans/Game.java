@@ -39,8 +39,10 @@ public class Game {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false) // change nullable to false if needed. design wise it's best to only create if changed from default
     private Layout layout;
-    @Column(nullable = false, name = "game_url")
+    @Column(name = "game_url")
     private String url;
+    @Column(nullable = false)
+    private boolean isMultiplayer;
 
     @OneToMany(
             cascade = {CascadeType.ALL},

@@ -16,6 +16,7 @@ public class EntityFactory {
                 .category(Category.values()[(int)(Math.random()*Category.values().length)])
                 .questionsPerRound((int)(Math.random()*10)+1)
                 .layout(Layout.NORMAL)
+                .isMultiplayer(false)
                 .build();
     }
 
@@ -28,6 +29,7 @@ public class EntityFactory {
                 .category(Category.ANY)
                 .questionsPerRound((int)(Math.random()*10)+1)
                 .layout(Layout.NORMAL)
+                .isMultiplayer(false)
                 .build();
     }
 
@@ -40,6 +42,7 @@ public class EntityFactory {
                 .category(Category.values()[(int)(Math.random()*Category.values().length)])
                 .questionsPerRound((int)(Math.random()*10)+1)
                 .layout(Layout.NORMAL)
+                .isMultiplayer(false)
                 .build();
     }
 }
