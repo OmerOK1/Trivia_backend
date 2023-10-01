@@ -7,4 +7,6 @@ public interface CustomerService {
 
     GameDto addGame(Game game) throws Exception;
 
+    GameDto getGame(int gameId) throws Exception;
+
 }

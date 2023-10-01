@@ -19,15 +19,14 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
-    private final CustomerRepository customerRepository;
+    //private final CustomerRepository customerRepository;
+    // private final QuestionRepository questionRepository;
     private final GameRepository gameRepository;
-    private final QuestionRepository questionRepository;
-
     private final OpenTdbApi openTdbApi;
 
     public CustomerServiceImpl(CustomerRepository customerRepository, QuestionRepository questionRepository, GameRepository gameRepository, OpenTdbApi openTdbApi) {
-        this.customerRepository = customerRepository;
-        this.questionRepository = questionRepository;
+        //this.customerRepository = customerRepository;
+        //this.questionRepository = questionRepository;
         this.gameRepository = gameRepository;
         this.openTdbApi = openTdbApi;
     }
@@ -39,23 +38,36 @@ public class CustomerServiceImpl implements CustomerService{
         URL = URL + "&type=multiple";
         return openTdbApi.getTrivia(URL);
     }
-    private List<Question> getQuestions(Game game) throws Exception {
+    private void setGameQuestions(Game game) throws Exception {
         List<Question> questions = OpenTdbMapper.mapManyFromDto(sendApiRequest(game).getResults());
         questions.forEach(question -> question.setGame(game));
-        return questions;
+        game.setQuestions(questions);
+    }
+    @Transactional
+    private void addGameToRepo(Game game) {
+        game = gameRepository.save(game);
+        game.setUrl("game/multiplayer/"+game.getId());
     }
 
+    /**
+     * @param game - received from client, expanded in External API, then saved to repository.
+     * method is split into stages to optimise connection time (limit logic under @Transactional) and improve readability.
+     */
     @Override
-    @Transactional
     public GameDto addGame(Game game) throws Exception {
         if (game == null) {
             System.out.println("game is null at Service");
             throw new Exception("game is null at Service");
         }
-
-        game.setQuestions(getQuestions(game));
-        game = gameRepository.save(game);
-        game.setUrl("game/multiplayer/"+game.getId());
+        setGameQuestions(game);
+        addGameToRepo(game);
         return ClientMapper.mapToGameDto(game);
     }
+
+    @Override
+    public GameDto getGame(int gameId) throws Exception {
+        return ClientMapper.mapToGameDto(gameRepository.findById(gameId).orElseThrow());
+    }
+
+
 }
