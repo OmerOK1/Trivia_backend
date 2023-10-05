@@ -4,14 +4,15 @@ import com.omer.trivia.apis.OpenTdbApi;
 import com.omer.trivia.apis.OpenTdbResponse;
 import com.omer.trivia.apis.dto.OpenTdbMapper;
 import com.omer.trivia.beans.Game;
+import com.omer.trivia.beans.Player;
 import com.omer.trivia.beans.Question;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
 import com.omer.trivia.reactDto.ClientMapper;
 import com.omer.trivia.reactDto.GameDto;
-import com.omer.trivia.repository.CustomerRepository;
+import com.omer.trivia.reactDto.JoinGameStruct;
 import com.omer.trivia.repository.GameRepository;
-import com.omer.trivia.repository.QuestionRepository;
+import com.omer.trivia.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,16 +20,14 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
-    //private final CustomerRepository customerRepository;
-    // private final QuestionRepository questionRepository;
     private final GameRepository gameRepository;
     private final OpenTdbApi openTdbApi;
+    private final PlayerRepository playerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, QuestionRepository questionRepository, GameRepository gameRepository, OpenTdbApi openTdbApi) {
-        //this.customerRepository = customerRepository;
-        //this.questionRepository = questionRepository;
+    public CustomerServiceImpl(GameRepository gameRepository, OpenTdbApi openTdbApi, PlayerRepository playerRepository) {
         this.gameRepository = gameRepository;
         this.openTdbApi = openTdbApi;
+        this.playerRepository = playerRepository;
     }
 
     private OpenTdbResponse sendApiRequest(Game game) throws Exception {
@@ -66,7 +65,43 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public GameDto getGame(int gameId) throws Exception {
-        return ClientMapper.mapToGameDto(gameRepository.findById(gameId).orElseThrow());
+        return ClientMapper.mapToGameDto(gameRepository.findById(gameId)
+                .orElseThrow(()-> new RuntimeException("Game not found with id: " + gameId)));
+    }
+
+    @Override
+    @Transactional
+    public JoinGameStruct addPlayerToGame(int gameId) throws Exception {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found with id: " + gameId));
+        String playerName = generateUniquePlayerName(game);
+        Player player = Player.builder()
+                .name(playerName)
+                .host(false)
+                .build();
+        game.addPlayer(player);
+        playerRepository.save(player);
+        System.out.println(player);
+        System.out.println(game);
+
+        return new JoinGameStruct(ClientMapper.mapToGameDto(game), player);
+    }
+
+    @Override
+    @Transactional
+    public Player updatePlayer(Player player, int gameId) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found with id: " + gameId));
+        game.removePlayer(player.getId());
+        game.addPlayer(player);
+        playerRepository.save(player);
+        System.out.println(player.getGame());
+        return player;
+    }
+
+    private String generateUniquePlayerName(Game game) {
+        int playerCount = game.getPlayers().size();
+        return "guest" + (playerCount);
     }
 
 

@@ -50,6 +50,29 @@ public class Game {
             fetch = FetchType.EAGER
     )
     @JsonIgnore
+    @Builder.Default
     private List<Question> questions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+
+    @Builder.Default
+    private List<Player> players = new ArrayList<>();
+
+    public void addPlayer(Player player) {
+        players.add(player);
+        player.setGame(this);
+    }
+
+    public void removePlayer(Player player) {
+        players.remove(player);
+        player.setGame(null);
+    }
+    public void removePlayer(int playerId) {
+        Player player = players.stream().filter(
+                (el) -> el.getId() == playerId).findAny().orElseThrow();
+        players.remove(player);
+        player.setGame(null);
+    }
 }
 

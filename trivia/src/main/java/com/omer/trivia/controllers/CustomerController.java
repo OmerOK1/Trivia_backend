@@ -1,7 +1,9 @@
 package com.omer.trivia.controllers;
 
 import com.omer.trivia.beans.Game;
+import com.omer.trivia.beans.Player;
 import com.omer.trivia.reactDto.GameDto;
+import com.omer.trivia.reactDto.JoinGameStruct;
 import com.omer.trivia.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +27,22 @@ public class CustomerController {
         return this.customerService.addGame(game);
     }
 
-    @PostMapping({"games/getone"})
-    @ResponseStatus(HttpStatus.OK)
-    public GameDto getCoupon(@RequestBody int id) throws Exception {
-        return this.customerService.getGame(id);
+    @PutMapping({"games/update"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public Player updatePlayer(@RequestBody Player player, @RequestParam int gameId) throws Exception {
+        return this.customerService.updatePlayer(player, gameId);
     }
+
+    @GetMapping({"games/join"})
+    @ResponseStatus(HttpStatus.OK)
+    public JoinGameStruct addPlayerToGame(@RequestParam int gameId) throws Exception {
+        return this.customerService.addPlayerToGame(gameId);
+    }
+    //    @GetMapping({"games/get"})
+//    @ResponseStatus(HttpStatus.OK)
+//    public GameDto getGame(@RequestParam int id) throws Exception {
+//        return this.customerService.getGame(id);
+//    }
 
 }
 

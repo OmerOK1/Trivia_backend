@@ -4,6 +4,7 @@ import com.omer.trivia.apis.OpenTdbApi;
 import com.omer.trivia.apis.OpenTdbResponse;
 import com.omer.trivia.apis.dto.QuestionDtoOpenTdb;
 import com.omer.trivia.beans.Game;
+import com.omer.trivia.beans.Player;
 import com.omer.trivia.controllers.CustomerController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -58,6 +59,18 @@ public class TriviaApiTests implements CommandLineRunner {
         }
         try {
             customerController.addGame(anyDifficulty);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            customerController.addPlayerToGame(1);
+            customerController.addPlayerToGame(1);
+            customerController.addPlayerToGame(1);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            customerController.updatePlayer(Player.builder().id(1).name("jon").build(), 1 );
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
