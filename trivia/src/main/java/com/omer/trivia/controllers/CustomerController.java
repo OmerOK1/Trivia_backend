@@ -30,6 +30,7 @@ public class CustomerController {
     @PutMapping({"games/update"})
     @ResponseStatus(HttpStatus.CREATED)
     public Player updatePlayer(@RequestBody Player player, @RequestParam int gameId) throws Exception {
+        System.err.println("arrived at update player (controller)");
         return this.customerService.updatePlayer(player, gameId);
     }
 

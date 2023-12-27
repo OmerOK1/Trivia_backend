@@ -35,6 +35,7 @@ public class CustomerServiceImpl implements CustomerService{
         if (game.getCategory() != Category.ANY) URL = URL + "&category=" + (game.getCategory().ordinal()+9);
         if (game.getDifficulty() != Difficulty.ANY) URL = URL + "&difficulty=" + game.getDifficulty();
         URL = URL + "&type=multiple";
+        System.out.println(URL);
         return openTdbApi.getTrivia(URL);
     }
     private void setGameQuestions(Game game) throws Exception {
@@ -94,8 +95,9 @@ public class CustomerServiceImpl implements CustomerService{
                 .orElseThrow(() -> new RuntimeException("Game not found with id: " + gameId));
         game.removePlayer(player.getId());
         game.addPlayer(player);
-        playerRepository.save(player);
+        playerRepository.saveAndFlush(player);
         System.out.println(player.getGame());
+        System.err.println(player.getName());
         return player;
     }
 

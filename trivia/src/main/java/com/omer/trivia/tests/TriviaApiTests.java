@@ -10,7 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@Component
+//@Component
 public class TriviaApiTests implements CommandLineRunner {
     private final CustomerController customerController;
     public TriviaApiTests(final CustomerController customerController) {
@@ -79,6 +79,6 @@ public class TriviaApiTests implements CommandLineRunner {
     @Override
     public void run(String... args) {
         //triviaTest();
-        controllerTest();
+        //controllerTest();
     }
 }

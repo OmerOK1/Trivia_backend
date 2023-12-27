@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class JoinGameStruct {
-    private GameDto game;
+    private GameDto game; // TODO: player returns Game
     private Player player;
 }
