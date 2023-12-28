@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "games")
@@ -70,7 +69,7 @@ public class Game {
     }
     public void removePlayer(int playerId) {
         Player player = players.stream().filter(
-                (el) -> el.getId() == playerId).findAny().orElseThrow();
+                (el) -> el.getPlayerId() == playerId).findAny().orElseThrow();
         players.remove(player);
         player.setGame(null);
     }

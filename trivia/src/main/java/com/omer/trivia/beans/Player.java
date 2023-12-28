@@ -2,9 +2,6 @@ package com.omer.trivia.beans;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
-
-import java.util.Objects;
 
 @Entity
 @Data
@@ -15,7 +12,7 @@ import java.util.Objects;
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int playerId;
     @ManyToOne( cascade = {CascadeType.ALL})
     @JoinColumn(name = "game_id")
     @ToString.Exclude

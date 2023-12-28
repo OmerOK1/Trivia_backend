@@ -24,6 +24,7 @@ public class CustomerController {
     @PostMapping({"games"})
     @ResponseStatus(HttpStatus.CREATED)
     public GameDto addGame(@RequestBody Game game) throws Exception {
+        System.out.println("customerController addGame() reached");
         return this.customerService.addGame(game);
     }
 
@@ -37,6 +38,7 @@ public class CustomerController {
     @GetMapping({"games/join"})
     @ResponseStatus(HttpStatus.OK)
     public JoinGameStruct addPlayerToGame(@RequestParam int gameId) throws Exception {
+        System.out.println("customerController addPlayerToGame() reached");
         return this.customerService.addPlayerToGame(gameId);
     }
     //    @GetMapping({"games/get"})

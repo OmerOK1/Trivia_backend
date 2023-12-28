@@ -7,7 +7,6 @@ import com.omer.trivia.beans.Game;
 import com.omer.trivia.beans.Player;
 import com.omer.trivia.controllers.CustomerController;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 //@Component
@@ -70,7 +69,7 @@ public class TriviaApiTests implements CommandLineRunner {
             throw new RuntimeException(e);
         }
         try {
-            customerController.updatePlayer(Player.builder().id(1).name("jon").build(), 1 );
+            customerController.updatePlayer(Player.builder().playerId(1).name("jon").build(), 1 );
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

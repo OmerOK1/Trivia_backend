@@ -93,7 +93,7 @@ public class CustomerServiceImpl implements CustomerService{
     public Player updatePlayer(Player player, int gameId) {
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new RuntimeException("Game not found with id: " + gameId));
-        game.removePlayer(player.getId());
+        game.removePlayer(player.getPlayerId());
         game.addPlayer(player);
         playerRepository.saveAndFlush(player);
         System.out.println(player.getGame());
