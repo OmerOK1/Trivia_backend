@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService{
     private void setGameQuestions(Game game) throws Exception {
         List<Question> questions = OpenTdbMapper.mapManyFromDto(sendApiRequest(game).getResults());
         questions.forEach(question -> question.setGame(game));
-        game.setQuestions(questions);
+        (game).setQuestions(questions);
     }
     @Transactional
     private void addGameToRepo(Game game) {
@@ -50,23 +50,24 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     /**
-     * @param game - received from client, expanded in External API, then saved to repository.
+     * @param gameDto - received from client, expanded in External API, then saved to repository.
      * method is split into stages to optimise connection time (limit logic under @Transactional) and improve readability.
      */
     @Override
-    public GameDto addGame(Game game) throws Exception {
-        if (game == null) {
-            System.out.println("game is null at Service");
-            throw new Exception("game is null at Service");
+    public GameDto addGame(GameDto gameDto) throws Exception {
+        if (gameDto == null) {
+            System.out.println("gameDto is null at Service");
+            throw new Exception("gameDto is null at Service");
         }
+        Game game = ClientMapper.mapDtoToGame(gameDto);
         setGameQuestions(game);
         addGameToRepo(game);
-        return ClientMapper.mapToGameDto(game);
+        return ClientMapper.mapGameToDto(game);
     }
 
     @Override
     public GameDto getGame(int gameId) throws Exception {
-        return ClientMapper.mapToGameDto(gameRepository.findById(gameId)
+        return ClientMapper.mapGameToDto(gameRepository.findById(gameId)
                 .orElseThrow(()-> new RuntimeException("Game not found with id: " + gameId)));
     }
 
@@ -85,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService{
         System.out.println(player);
         System.out.println(game);
 
-        return new JoinGameStruct(ClientMapper.mapToGameDto(game), player);
+        return new JoinGameStruct(ClientMapper.mapGameToDto(game), player);
     }
 
     @Override

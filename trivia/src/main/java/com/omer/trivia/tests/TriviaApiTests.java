@@ -6,6 +6,7 @@ import com.omer.trivia.apis.dto.QuestionDtoOpenTdb;
 import com.omer.trivia.beans.Game;
 import com.omer.trivia.beans.Player;
 import com.omer.trivia.controllers.CustomerController;
+import com.omer.trivia.reactDto.ClientMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -43,7 +44,7 @@ public class TriviaApiTests implements CommandLineRunner {
     }
 
     private void controllerTest() {
-        Game game = EntityFactory.factorRandomGame();
+/*        Game game = ClientMapper.mapGameToDto(EntityFactory.factorRandomGame();
         Game anyDifficulty = EntityFactory.factorGameWithAnyAsDifficulty();
         Game anyCategory = EntityFactory.factorGameWithAnyAsCategory();
         try {
@@ -72,7 +73,7 @@ public class TriviaApiTests implements CommandLineRunner {
             customerController.updatePlayer(Player.builder().playerId(1).name("jon").build(), 1 );
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     @Override

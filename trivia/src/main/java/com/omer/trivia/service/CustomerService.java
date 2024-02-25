@@ -7,7 +7,7 @@ import com.omer.trivia.reactDto.JoinGameStruct;
 
 public interface CustomerService {
 
-    GameDto addGame(Game game) throws Exception;
+    GameDto addGame(GameDto game) throws Exception;
 
     GameDto getGame(int gameId) throws Exception;
 

@@ -3,6 +3,7 @@ package com.omer.trivia.beans;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
+import com.omer.trivia.beans.enums.GameMode;
 import com.omer.trivia.beans.enums.Layout;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -42,6 +43,9 @@ public class Game {
     private String url;
     @Column(nullable = false)
     private boolean isMultiplayer;
+//    @Column(nullable = false)
+//    @Enumerated(EnumType.STRING)
+//    private GameMode gameMode;
 
     @OneToMany(
             cascade = {CascadeType.ALL},
@@ -54,7 +58,6 @@ public class Game {
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
-
     @Builder.Default
     private List<Player> players = new ArrayList<>();
 

@@ -23,7 +23,7 @@ public class CustomerController {
 
     @PostMapping({"games"})
     @ResponseStatus(HttpStatus.CREATED)
-    public GameDto addGame(@RequestBody Game game) throws Exception {
+    public GameDto addGame(@RequestBody GameDto game) throws Exception {
         System.out.println("customerController addGame() reached");
         return this.customerService.addGame(game);
     }
