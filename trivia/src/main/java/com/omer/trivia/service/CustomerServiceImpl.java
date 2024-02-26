@@ -39,21 +39,31 @@ public class CustomerServiceImpl implements CustomerService{
         System.out.println(URL);
         return openTdbApi.getTrivia(URL);
     }
-    private void setGameQuestions(Game game) throws Exception {
+    private void setGameQuestions(Game game, boolean sort) throws Exception {
         List<Question> questions = OpenTdbMapper.mapManyFromDto(sendApiRequest(game).getResults());
         questions.forEach(question -> question.setGame(game));
-        questions.sort(Comparator.comparing(Question::getDifficulty));
+        if (sort) questions.sort(Comparator.comparing(Question::getDifficulty));
         (game).setQuestions(questions);
     }
     private void setGameQuestionsByMode(Game game) throws Exception {
-        switch(game.getGameMode()) {
-            case CLASSIC: break;
-            case SURVIVAL: game.setDifficulty(Difficulty.ANY);
-            case TIME_TRIAL: game.setQuestionsPerRound(50);
-            break;
+        boolean sortedType = false;
+
+        switch (game.getGameMode()) {
+            case CLASSIC -> sortedType = true;
+            case SURVIVAL -> {
+                sortedType = true;
+                game.setDifficulty(Difficulty.ANY);
+                game.setQuestionsPerRound(30);
+            }
+            case TIME_TRIAL -> {
+                sortedType = true;
+                game.setQuestionsPerRound(50);
+            }
         }
-        setGameQuestions(game);
+
+        setGameQuestions(game, sortedType);
     }
+
     @Transactional
     private void addGameToRepo(Game game) {
         game = gameRepository.save(game);
