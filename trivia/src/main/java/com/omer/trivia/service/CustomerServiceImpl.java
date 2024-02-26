@@ -16,6 +16,7 @@ import com.omer.trivia.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -41,7 +42,17 @@ public class CustomerServiceImpl implements CustomerService{
     private void setGameQuestions(Game game) throws Exception {
         List<Question> questions = OpenTdbMapper.mapManyFromDto(sendApiRequest(game).getResults());
         questions.forEach(question -> question.setGame(game));
+        questions.sort(Comparator.comparing(Question::getDifficulty));
         (game).setQuestions(questions);
+    }
+    private void setGameQuestionsByMode(Game game) throws Exception {
+        switch(game.getGameMode()) {
+            case CLASSIC: break;
+            case SURVIVAL: game.setDifficulty(Difficulty.ANY);
+            case TIME_TRIAL: game.setQuestionsPerRound(50);
+            break;
+        }
+        setGameQuestions(game);
     }
     @Transactional
     private void addGameToRepo(Game game) {
@@ -60,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService{
             throw new Exception("gameDto is null at Service");
         }
         Game game = ClientMapper.mapDtoToGame(gameDto);
-        setGameQuestions(game);
+        setGameQuestionsByMode(game);
         addGameToRepo(game);
         return ClientMapper.mapGameToDto(game);
     }

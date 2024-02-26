@@ -1,6 +1,7 @@
 package com.omer.trivia.apis.dto;
 
 import com.omer.trivia.beans.Question;
+import com.omer.trivia.beans.enums.Difficulty;
 import org.apache.commons.text.StringEscapeUtils;
 
 
@@ -18,6 +19,7 @@ public class OpenTdbMapper {
                 .option4(decode(options.get(3)))
                 .questionBody(decode(dto.getQuestion()))
                 .correctAnswer(decode(dto.getCorrect_answer()))
+                .difficulty(Difficulty.valueOf(dto.getDifficulty()))
                 .build();
     }
 

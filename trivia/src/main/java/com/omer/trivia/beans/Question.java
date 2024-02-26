@@ -32,6 +32,11 @@ public class Question {
     private String option4;
     @Column(nullable = false)
     private String correctAnswer;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Difficulty difficulty;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @ToString.Exclude
