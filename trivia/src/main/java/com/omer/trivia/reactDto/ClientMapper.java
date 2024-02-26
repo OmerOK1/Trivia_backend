@@ -4,6 +4,7 @@ import com.omer.trivia.beans.Game;
 import com.omer.trivia.beans.Question;
 import com.omer.trivia.beans.enums.Category;
 import com.omer.trivia.beans.enums.Difficulty;
+import com.omer.trivia.beans.enums.GameMode;
 import com.omer.trivia.beans.enums.Layout;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class ClientMapper {
         dto.setQuestionsPerRound(entity.getQuestionsPerRound());
         dto.setQuestions(mapToDtoList(entity.getQuestions()));
         dto.setMultiplayer(entity.isMultiplayer());
+        dto.setGameMode(entity.getGameMode().toString());
         return dto;
     }
 
@@ -71,6 +73,7 @@ public class ClientMapper {
                 .category(Category.valueOf(entity.getCategory()))
                 .difficulty(Difficulty.valueOf(entity.getDifficulty()))
                 .layout(Layout.valueOf(entity.getLayout()))
+                .gameMode(GameMode.valueOf(entity.getGameMode()))
                 .url(entity.getUrl())
                 .title(entity.getTitle())
                 .answerTimeLimit(entity.getAnswerTimeLimit())

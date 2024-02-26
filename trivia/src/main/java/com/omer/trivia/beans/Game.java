@@ -43,9 +43,9 @@ public class Game {
     private String url;
     @Column(nullable = false)
     private boolean isMultiplayer;
-//    @Column(nullable = false)
-//    @Enumerated(EnumType.STRING)
-//    private GameMode gameMode;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private GameMode gameMode;
 
     @OneToMany(
             cascade = {CascadeType.ALL},
