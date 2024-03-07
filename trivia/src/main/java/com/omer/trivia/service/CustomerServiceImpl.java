@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService{
             case SURVIVAL -> {
                 sortedType = true;
                 game.setDifficulty(Difficulty.ANY);
-                game.setQuestionsPerRound(30);
+                game.setQuestionsPerRound(50);
             }
             case TIME_TRIAL -> {
                 sortedType = true;
